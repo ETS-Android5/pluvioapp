@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PluvioApp</string>
+    <string name="precipitacao_mm">Precipitação (mm):</string>
+    <string name="data_registro">Data/Hora:</string>
+    <string name="pomar001">Pomar 01</string>
+    <string name="data_hora_hint">Data/Hora do registro</string>
+    <string name="registro_chuva_mm">Registro em mm de chuva</string>
+    <string name="pomar002">Pomar 02</string>
+    <string name="pomar003">Pomar 03</string>
+    <string name="teste">Teste</string>
+    <string name="ligou_irrigacao">Ligou irrigação?</string>
+    <string name="opcao_sim">Sim</string>
+    <string name="opcao_nao">Não</string>
+    <string name="salvar_registro">Salvar</string>
+    <string name="criador_registro">Criador:</string>
+    <string name="responsavel_registro">Responsável:</string>
+    <string name="limpar_registros">Limpar</string>
+</resources>

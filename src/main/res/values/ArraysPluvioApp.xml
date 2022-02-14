@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="criador">
+        <item>Ismael</item>
+        <item>Maira</item>
+        <item>Mateus</item>
+    </string-array>
+
+</resources>
