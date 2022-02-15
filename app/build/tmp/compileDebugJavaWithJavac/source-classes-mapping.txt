@@ -1,0 +1,8 @@
+br/com/ismaellunkes/pluvioapp/MainActivity.java
+ br.com.ismaellunkes.pluvioapp.MainActivity
+ br.com.ismaellunkes.pluvioapp.MainActivity$1
+ br.com.ismaellunkes.pluvioapp.MainActivity$2
+br/com/ismaellunkes/pluvioapp/Registro.java
+ br.com.ismaellunkes.pluvioapp.Registro
+br/com/ismaellunkes/pluvioapp/BuildConfig.java
+ br.com.ismaellunkes.pluvioapp.BuildConfig
