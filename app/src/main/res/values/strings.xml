@@ -15,4 +15,8 @@
     <string name="criador_registro">Criador:</string>
     <string name="responsavel_registro">Responsável:</string>
     <string name="limpar_registros">Limpar</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="autoria">Autoria</string>
+    <string name="sinal_de_mais">+</string>
+    <string name="sinal_de_dois_pontos">:</string>
 </resources>

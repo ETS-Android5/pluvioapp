@@ -58,5 +58,9 @@
     {
         "merged": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
         "source": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/build/intermediates/merged_res/debug/layout_activity_listview.xml.flat",
+        "source": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/src/main/res/layout/activity_listview.xml"
     }
 ]

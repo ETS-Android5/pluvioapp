@@ -2,11 +2,15 @@ package br.com.ismaellunkes.pluvioapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -17,13 +21,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String MODO = "NOVO_CADASTRO";
     private Registro registro;
+    private List<Registro> registros;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        registros = new ArrayList<>();
+
 
         final EditText edtTxtDataHoraReg = findViewById(R.id.edtTxtDataHoraReg);
         final EditText edtTxtPrecipitacao = findViewById(R.id.edtTxtPrecipitacao);
@@ -112,7 +121,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void salvarDados(Registro registro) {
-
+        //registros.add(registro);
+        Intent intent = new Intent(this, ListViewActivity.class);
+        intent.putExtra(ListViewActivity.REGISTRO, registro);
+        startActivity(intent);
         Toast.makeText(this, "Dados foram salvos: " + registro.toString(), Toast.LENGTH_LONG).show();
 
     }

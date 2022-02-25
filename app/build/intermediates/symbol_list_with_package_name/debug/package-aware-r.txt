@@ -63,7 +63,10 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
-array criador
+array dataHora
+array locais
+array precipitacao
+array responsavel
 attr SharedValue
 attr SharedValueId
 attr actionBarDivider
@@ -2605,6 +2608,8 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btnAdicionar
+id btnCreditos
 id btnLimpar
 id btnSalvar
 id buttonPanel
@@ -2639,6 +2644,7 @@ id collapseActionView
 id compress
 id confirm_button
 id constraint
+id constraintLayout
 id container
 id content
 id contentPanel
@@ -2755,6 +2761,7 @@ id linearLayout3
 id linearLayout4
 id linearLayout5
 id listMode
+id listViewRegistros
 id list_item
 id masked
 id match_constraint
@@ -3088,6 +3095,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_listview
 layout activity_main
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -3208,9 +3216,11 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string adicionar
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
+string autoria
 string bottom_sheet_behavior
 string bottomsheet_action_expand_halfway
 string character_counter_content_description
@@ -3326,6 +3336,8 @@ string registro_chuva_mm
 string responsavel_registro
 string salvar_registro
 string search_menu_title
+string sinal_de_dois_pontos
+string sinal_de_mais
 string status_bar_notification_info_overflow
 string teste
 style AlertDialog_AppCompat
