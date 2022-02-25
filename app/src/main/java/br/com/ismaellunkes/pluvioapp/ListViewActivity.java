@@ -32,8 +32,6 @@ public class ListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
         final ListView listViewEntities = findViewById(R.id.listViewRegistros);
-        final Button btnAdicionar = findViewById(R.id.btnAdicionar);
-        final Button btnCreditos = findViewById(R.id.btnCreditos);
 
         Intent intent = getIntent();
 
@@ -52,13 +50,6 @@ public class ListViewActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Registro registro = (Registro) listViewEntities.getItemAtPosition(i);
                 Toast.makeText(getApplicationContext(), registro.getRegistroResumido(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btnAdicionar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
             }
         });
 

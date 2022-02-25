@@ -2608,8 +2608,6 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
-id btnAdicionar
-id btnCreditos
 id btnLimpar
 id btnSalvar
 id buttonPanel

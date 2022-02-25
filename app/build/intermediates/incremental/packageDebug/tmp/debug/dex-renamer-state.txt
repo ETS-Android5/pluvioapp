@@ -1,4 +1,4 @@
-#Thu Feb 24 21:22:43 BRT 2022
+#Thu Feb 24 22:01:06 BRT 2022
 base.2=/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/build/intermediates/dex/debug/mergeProjectDexDebug/10/classes.dex
 path.2=10/classes.dex
 base.1=/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
