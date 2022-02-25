@@ -6,3 +6,7 @@ br/com/ismaellunkes/pluvioapp/Registro.java
  br.com.ismaellunkes.pluvioapp.Registro
 br/com/ismaellunkes/pluvioapp/BuildConfig.java
  br.com.ismaellunkes.pluvioapp.BuildConfig
+br/com/ismaellunkes/pluvioapp/ListViewActivity.java
+ br.com.ismaellunkes.pluvioapp.ListViewActivity
+ br.com.ismaellunkes.pluvioapp.ListViewActivity$1
+ br.com.ismaellunkes.pluvioapp.ListViewActivity$2

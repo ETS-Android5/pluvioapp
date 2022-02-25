@@ -1,8 +1,12 @@
 package br.com.ismaellunkes.pluvioapp;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Registro {
+public class Registro implements Serializable {
 
     private String dataHoraRegistro;
     private String precipitacao;
@@ -52,12 +56,16 @@ public class Registro {
 
     @Override
     public String toString() {
-        return "Registro{" +
-                "dataHoraRegistro='" + dataHoraRegistro + '\'' +
-                ", precipitacao=" + precipitacao +
-                ", locais=" + locais +
-                ", isLigouIrrigacao=" + isLigouIrrigacao +
-                ", responsavel='" + responsavel + '\'' +
-                '}';
+        return  "Hora: " + dataHoraRegistro +
+                "  |  Precip. (MM): " + precipitacao +
+                "\nLocais: " + locais +
+                "  |  Ligou Irrig.: " + (isLigouIrrigacao ? "SIM" : "NÃO") +
+                "\nResponsável: " + responsavel;
     }
+
+    public String getRegistroResumido(){
+        return  "Hora: " + dataHoraRegistro +
+                "\nPrecip. (MM): " + precipitacao;
+    }
+
 }
