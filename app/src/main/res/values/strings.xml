@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">PluvioApp</string>
+    <string name="sobre_pluvio">Sobre:</string>
+    <string name="autor">Ismael Lunkes Pereira</string>
     <string name="precipitacao_mm">Precipitação (mm):</string>
     <string name="data_registro">Data/Hora:</string>
     <string name="pomar001">Pomar 01</string>
@@ -16,7 +18,15 @@
     <string name="responsavel_registro">Responsável:</string>
     <string name="limpar_registros">Limpar</string>
     <string name="adicionar">Adicionar</string>
-    <string name="autoria">Autoria</string>
+    <string name="autoria">Autoria:</string>
     <string name="sinal_de_mais">+</string>
     <string name="sinal_de_dois_pontos">:</string>
+    <string name="title_activity_sobre">Sobre</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

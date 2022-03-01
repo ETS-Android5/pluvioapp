@@ -8,83 +8,128 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 public class ListViewActivity extends AppCompatActivity {
 
 
+    public static final int NOVO_REGISTRO = 1;
     public static final String REGISTRO = "REGISTRO";
+    public static final String MODO = "MODO";
     List<Registro> registros = new ArrayList<>();
+    private int  posicaoSelecionada = -1;
+    ArrayAdapter<Registro> adapter;
+    ListView listViewEntities;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
-        final ListView listViewEntities = findViewById(R.id.listViewRegistros);
+        listViewEntities = findViewById(R.id.listViewRegistros);
         final Button btnAdicionar = findViewById(R.id.btnAdicionar);
         final Button btnCreditos = findViewById(R.id.btnCreditos);
-
-        Intent intent = getIntent();
-
-        Bundle bundle = intent.getExtras();
-
-        Registro registro = (Registro) getIntent().getSerializableExtra(REGISTRO);
-
-        registros.add(registro);
-
-        ArrayAdapter<Registro> adapter = new ArrayAdapter<Registro>(this,
-                android.R.layout.simple_list_item_1, getRegistrosList());
-        listViewEntities.setAdapter(adapter);
 
         listViewEntities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Registro registro = (Registro) listViewEntities.getItemAtPosition(i);
-                Toast.makeText(getApplicationContext(), registro.getRegistroResumido(), Toast.LENGTH_LONG).show();
+                posicaoSelecionada = i;
+                alterarRegistro();
+                //Registro registro = (Registro) listViewEntities.getItemAtPosition(i);
+               // Toast.makeText(getApplicationContext(), registro.getRegistroResumido(), Toast.LENGTH_LONG).show();
             }
         });
+
+        listViewEntities.setOnItemLongClickListener(
+                new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent,
+                                                   View view,
+                                                   int position,
+                                                   long id) {
+
+                        posicaoSelecionada = position;
+                        alterarRegistro();
+                        return true;
+                    }
+                });
 
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                adicionarRegistro(view);
             }
         });
 
+        btnCreditos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                abrirSobre(view);
+            }
+        });
+
+        popularLista();
+
     }
 
-    private List<Registro> getRegistrosList() {
-        List<String> dataHoras = Arrays.asList(getResources().getStringArray(R.array.dataHora));
-        String[] precipitacaos = getResources().getStringArray(R.array.precipitacao);
-        String[] locais = getResources().getStringArray(R.array.locais);
-        String[] responsaveis = getResources().getStringArray(R.array.responsavel);
+    private void popularLista(){
+
         registros = new ArrayList<>();
 
-        for (String dataHora : dataHoras) {
-            Registro registro = new Registro();
-            registro.setDataHoraRegistro(dataHora);
-            registro.setPrecipitacao(precipitacaos[getValorRandomico()]);
-            registro.setLocais(new ArrayList(Arrays.asList(locais[getValorRandomico()])));
-            registro.setLigouIrrigacao(Integer.parseInt(registro.getPrecipitacao()) < 30);
-            registro.setResponsavel(responsaveis[getValorRandomico()]);
-            registros.add(registro);
+        adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1,
+                registros);
+
+        if (listViewEntities != null) {
+            listViewEntities.setAdapter(adapter);
         }
-        return registros;
     }
 
-    private int getValorRandomico() {
-        Random random = new Random();
-        return random.nextInt(6);
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
+
+    private void alterarRegistro(){
+
+        Registro registro = registros.get(posicaoSelecionada);
+
+        CadastroActivity.alterarRegistro(this, registro);
+    }
+
+    public void adicionarRegistro(View view){
+        CadastroActivity.novoRegistro(this);
+    }
+
+    public void abrirSobre(View view){
+        SobreActivity.sobre(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode,
+                                    int resultCode,
+                                    Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+
+            Registro registroNew = (Registro) data.getSerializableExtra(REGISTRO);
+
+            if (requestCode == CadastroActivity.ALTERAR) {
+                registros.remove(posicaoSelecionada);
+                registros.add(posicaoSelecionada, registroNew);
+                posicaoSelecionada = -1;
+            } else {
+                registros.add(registroNew);
+            }
+
+            adapter.notifyDataSetChanged();
+        }
+    }
+
 }

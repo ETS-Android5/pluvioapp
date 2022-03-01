@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_sobre.xml",
+        "source": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/src/main/res/layout/activity_sobre.xml"
+    },
+    {
+        "merged": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_listview.xml",
+        "source": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/src/main/res/layout/activity_listview.xml"
+    },
+    {
+        "merged": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_cadastro.xml",
+        "source": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/src/main/res/layout/activity_cadastro.xml"
+    },
+    {
+        "merged": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_main.xml",
+        "source": "/home/ismaellunkes/Documentos/UC-MOBILE/pluvioapp/app/src/main/res/layout/activity_main.xml"
+    }
+]

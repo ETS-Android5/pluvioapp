@@ -1,12 +1,22 @@
-br/com/ismaellunkes/pluvioapp/MainActivity.java
- br.com.ismaellunkes.pluvioapp.MainActivity
- br.com.ismaellunkes.pluvioapp.MainActivity$1
- br.com.ismaellunkes.pluvioapp.MainActivity$2
+br/com/ismaellunkes/pluvioapp/SobreActivity.java
+ br.com.ismaellunkes.pluvioapp.SobreActivity
 br/com/ismaellunkes/pluvioapp/Registro.java
  br.com.ismaellunkes.pluvioapp.Registro
 br/com/ismaellunkes/pluvioapp/BuildConfig.java
  br.com.ismaellunkes.pluvioapp.BuildConfig
+br/com/ismaellunkes/pluvioapp/CadastroActivity.java
+ br.com.ismaellunkes.pluvioapp.CadastroActivity
+ br.com.ismaellunkes.pluvioapp.CadastroActivity$1
+ br.com.ismaellunkes.pluvioapp.CadastroActivity$2
+br/com/ismaellunkes/pluvioapp/databinding/ActivityListviewBinding.java
+ br.com.ismaellunkes.pluvioapp.databinding.ActivityListviewBinding
+br/com/ismaellunkes/pluvioapp/databinding/ActivityCadastroBinding.java
+ br.com.ismaellunkes.pluvioapp.databinding.ActivityCadastroBinding
 br/com/ismaellunkes/pluvioapp/ListViewActivity.java
  br.com.ismaellunkes.pluvioapp.ListViewActivity
  br.com.ismaellunkes.pluvioapp.ListViewActivity$1
  br.com.ismaellunkes.pluvioapp.ListViewActivity$2
+ br.com.ismaellunkes.pluvioapp.ListViewActivity$3
+ br.com.ismaellunkes.pluvioapp.ListViewActivity$4
+br/com/ismaellunkes/pluvioapp/databinding/ActivitySobreBinding.java
+ br.com.ismaellunkes.pluvioapp.databinding.ActivitySobreBinding
