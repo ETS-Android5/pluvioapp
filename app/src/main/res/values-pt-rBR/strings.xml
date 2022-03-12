@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sobre_pluvio">Sobre</string>
+    <string name="autor_e_contato">Ismael Lunkes Pereira |Especialização em Java | lunkes86@gmail.com</string>
+    <string name="precipitacao_mm">Precipitação (mm):</string>
+    <string name="data_registro">Data/Hora</string>
+    <string name="pomar001">Pomar 01</string>
+    <string name="data_hora_hint">Data/Hora do registro</string>
+    <string name="registro_chuva_mm">Registro de mm de chuva</string>
+    <string name="pomar002">Pomar 02</string>
+    <string name="pomar003">Pomar 03</string>
+    <string name="teste">Teste</string>
+    <string name="ligou_irrigacao">Ligou irrigação?</string>
+    <string name="opcao_sim">Sim</string>
+    <string name="opcao_nao">Não</string>
+    <string name="salvar_registro">Salvar</string>
+    <string name="criador_registro">Criador:</string>
+    <string name="responsavel_registro">Responsável:</string>
+    <string name="limpar_registros">Limpar</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="autoria">Autoria:</string>
+    <string name="title_activity_sobre">Sobre</string>
+    <string name="objetivo_app">Utilizado para registrar chuvas e irrigação de pormares.</string>
+    <string name="item_novo">Novo</string>
+    <string name="item_creditos">Creditos</string>
+    <string name="item_sobre">Sobre</string>
+    <string name="item_adicionar">Adicionar</string>
+    <string name="item_alterar">Alterar</string>
+    <string name="item_excluir">Excluir</string>
+    <string name="item_salvar">Salvar</string>
+    <string name="item_limpar">Limpar</string>
+</resources>
