@@ -6,6 +6,10 @@ br/com/ismaellunkes/pluvioapp/Registro.java
  br.com.ismaellunkes.pluvioapp.Registro
 br/com/ismaellunkes/pluvioapp/BuildConfig.java
  br.com.ismaellunkes.pluvioapp.BuildConfig
+br/com/ismaellunkes/pluvioapp/databinding/ActivityListviewBinding.java
+ br.com.ismaellunkes.pluvioapp.databinding.ActivityListviewBinding
+br/com/ismaellunkes/pluvioapp/databinding/ActivityMainBinding.java
+ br.com.ismaellunkes.pluvioapp.databinding.ActivityMainBinding
 br/com/ismaellunkes/pluvioapp/ListViewActivity.java
  br.com.ismaellunkes.pluvioapp.ListViewActivity
  br.com.ismaellunkes.pluvioapp.ListViewActivity$1
