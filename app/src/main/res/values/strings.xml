@@ -1,35 +1,42 @@
 <resources>
     <string name="app_name" translatable="false">PluvioApp</string>
-    <string name="sobre_pluvio">About:</string>
-    <string name="autor_e_contato">Ismael Lunkes Pereira | Java Specilization | lunkes86@gmail.com</string>
+    <string name="sobre">About</string>
+    <string name="autor" translatable="false">Ismael Lunkes Pereira</string>
+    <string name="curso">Java Specilization</string>
+    <string name="email_autor" translatable="false">lunkes86@gmail.com</string>
     <string name="instituicao" translatable="false">UTFPR</string>
-    <string name="precipitacao_mm">Precipitation (mm):</string>
-    <string name="data_registro">Date/Time:</string>
+    <string name="precipitacao">Precipitation</string>
+    <string name="mm" translatable="false">mm</string>
+    <string name="data_registro">Date/Time</string>
     <string name="pomar001">Orchard 01</string>
     <string name="data_hora_hint">Record date/time</string>
     <string name="registro_chuva_mm">Record of mm of rain</string>
     <string name="pomar002">Orchard 02</string>
     <string name="pomar003">Orchard 03</string>
-    <string name="teste">Test</string>
-    <string name="ligou_irrigacao">" Turned on Irrigation?"</string>
-    <string name="opcao_sim">Yes</string>
-    <string name="opcao_nao">No</string>
-    <string name="salvar_registro">Save</string>
-    <string name="criador_registro">Creator:</string>
-    <string name="responsavel_registro">Responsible:</string>
-    <string name="limpar_registros">Clear</string>
+    <string name="ligou_irrigacao">Turned on Irrigation?</string>
+    <string name="sim">Yes</string>
+    <string name="nao">No</string>
+    <string name="criador">Creator</string>
+    <string name="responsavel">Responsible</string>
+    <string name="limpar">Clear</string>
+    <string name="autoria">Authorship</string>
+    <string name="objetivo">It is used for rainfall recording and orchard irrigation control.</string>
+    <string name="novo">New</string>
+    <string name="creditos">Credits</string>
+    <string name="salvar">Save</string>
+    <string name="alterar" >Change</string>
     <string name="adicionar">Add</string>
-    <string name="autoria">Authorship:</string>
-    <string name="sinal_de_mais" translatable="false">+</string>
-    <string name="sinal_de_dois_pontos" translatable="false">:</string>
-    <string name="title_activity_sobre">About</string>
-    <string name="objetivo_app">It is used for rainfall recording and orchard irrigation control.</string>
-    <string name="item_novo">New</string>
-    <string name="item_creditos">Credits</string>
-    <string name="item_sobre">About</string>
-    <string name="item_adicionar">Add</string>
-    <string name="item_alterar" >Change</string>
-    <string name="item_excluir">Delete</string>
-    <string name="item_salvar">Save</string>
-    <string name="item_limpar">Clear</string>
+    <string name="excluir">Delete</string>
+    <string name="campos_limpos">All fields are cleared.</string>
+    <string name="validacao_datahora">Enter the date/time of registration.</string>
+    <string name="validacao_precipitacao">Inform the rainfall record.</string>
+    <string name="validacao_locais">Inform the locations.</string>
+    <string name="validacao_responsavel">Informe the responsible.</string>
+    <string name="mensagem_sucesso">Data has been saved successfully.</string>
+    <string name="datahora_mensagem">Date/Time:</string>
+    <string name="precip_mensagem" translatable="false">Precip. (MM):</string>
+    <string name="locais_mensagem">Location:</string>
+    <string name="ligou_irrig_mensagem">Turned Irrig.:</string>
+    <string name="responsavel_mensagem">Responsible:</string>
+    <string name="registro_detalhes">Date/Time: %1$s   |  Precip. (mm): %2$s \nLocation: %3$s   |  Turned Irrig.: %4$s \nResponsible: %5$s</string>
 </resources>

@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="16dp"
-            android:text="@string/precipitacao_mm" />
+            android:text="@string/precipitacao" />
 
         <EditText
             android:id="@+id/edtTxtPrecipitacao"
@@ -123,14 +123,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="@string/opcao_sim" />
+                android:text="@string/sim" />
 
             <RadioButton
                 android:id="@+id/rdBtnNao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="@string/opcao_nao"
+                android:text="@string/nao"
                 android:textAlignment="textEnd" />
 
         </RadioGroup>
@@ -151,7 +151,7 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/responsavel_registro"
+            android:text="@string/responsavel"
             android:textAlignment="center" />
 
         <Spinner

@@ -87,15 +87,15 @@ public class CadastroActivity extends AppCompatActivity {
                 edtTxtDataHoraReg.setText(registroOriginal.getDataHoraRegistro());
                 edtTxtPrecipitacao.setText(registroOriginal.getPrecipitacao());
                 for (String local :  registroOriginal.getLocais()) {
-                    if (local.equalsIgnoreCase("Pomar 01")){
+                    if (local.equalsIgnoreCase(chkPomar01.getText().toString())){
                         chkPomar01.setChecked(true);
                     }
 
-                    if (local.equalsIgnoreCase("Pomar 02")){
+                    if (local.equalsIgnoreCase(chkPomar02.getText().toString())){
                         chkPomar02.setChecked(true);
                     }
 
-                    if (local.equalsIgnoreCase("Pomar 03")){
+                    if (local.equalsIgnoreCase(chkPomar03.getText().toString())){
                         chkPomar03.setChecked(true);
                     }
                 }
@@ -119,28 +119,28 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void avisoCamposLimpos() {
-        Toast.makeText(this, "Campos foram limpos.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.campos_limpos), Toast.LENGTH_SHORT).show();
     }
 
     private boolean isDadosValidos(Registro registro) {
 
         if (registro.getDataHoraRegistro().isEmpty()) {
-            Toast.makeText(this, "Informe o data/hora do registro.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.validacao_datahora), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (registro.getPrecipitacao().isEmpty()) {
-            Toast.makeText(this, "Informe o registro de precipitação.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.validacao_precipitacao), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (registro.getLocais().isEmpty()) {
-            Toast.makeText(this, "Informe os locais.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.validacao_locais), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (registro.getResponsavel().isEmpty()) {
-            Toast.makeText(this, "Informe o responsável.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.validacao_responsavel), Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -156,7 +156,15 @@ public class CadastroActivity extends AppCompatActivity {
 
         finish();
 
-        Toast.makeText(this, "Dados foram salvos: " + registro.toString(), Toast.LENGTH_LONG).show();
+
+        String registroSalvo = getString(R.string.datahora_mensagem)+" "+ registro.getDataHoraRegistro() +
+                            " | "+getString(R.string.precip_mensagem)+" "+ registro.getPrecipitacao() +
+                            "\n"+getString(R.string.locais_mensagem)+" "+ registro.getLocais() +
+                            " | "+getString(R.string.ligou_irrig_mensagem)+" "+ (registro.isLigouIrrigacao() ? getString(R.string.sim) : getString(R.string.nao)) +
+                            "\n "+getString(R.string.responsavel_mensagem)+" "+ registro.getResponsavel();
+
+
+        Toast.makeText(this, getString(R.string.mensagem_sucesso) + "\n"+registroSalvo, Toast.LENGTH_LONG).show();
 
     }
 

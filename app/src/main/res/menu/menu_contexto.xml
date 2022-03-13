@@ -5,11 +5,11 @@
     <item
         android:id="@+id/alterar"
         android:icon="@android:drawable/ic_menu_edit"
-        android:title="@string/item_alterar"
+        android:title="@string/alterar"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/excluir"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/item_excluir"
+        android:title="@string/excluir"
         app:showAsAction="ifRoom" />
 </menu>

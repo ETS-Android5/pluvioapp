@@ -26,7 +26,7 @@ public class ListViewActivity extends AppCompatActivity {
     public static final String REGISTRO = "REGISTRO";
     List<Registro> registros = new ArrayList<>();
     private int  posicaoSelecionada = -1;
-    ArrayAdapter<Registro> adapter;
+    RegistroAdapterPersonalizado adapter;
     ListView listViewEntities;
     private ActionMode actionMode;
     private View       viewSelecionada;
@@ -150,11 +150,15 @@ public class ListViewActivity extends AppCompatActivity {
 
         registros = new ArrayList<>();
 
-        adapter = new ArrayAdapter<>(this,
+        /*adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
-                registros);
+                registros);*/
+
+        //adapter = new ArrayAdapter<Registro>(this,
+        //        android.R.layout.activity_list_item, R.id.listViewRegistros, registros);
 
         if (listViewEntities != null) {
+            adapter = new RegistroAdapterPersonalizado(registros, this);
             listViewEntities.setAdapter(adapter);
         }
     }
@@ -188,6 +192,13 @@ public class ListViewActivity extends AppCompatActivity {
         SobreActivity.sobre(this);
     }
 
+    private String getRegistroEmString(Registro registro){
+        return  getString(R.string.datahora_mensagem)+" "+ registro.getDataHoraRegistro() +
+                " | "+getString(R.string.precip_mensagem)+" "+ registro.getPrecipitacao() +
+                "\n"+getString(R.string.locais_mensagem)+" "+ registro.getLocais() +
+                "\n"+getString(R.string.ligou_irrig_mensagem)+" "+ (registro.isLigouIrrigacao() ? R.string.sim : R.string.nao) +
+                " | "+getString(R.string.responsavel_mensagem)+" "+ registro.getResponsavel();
+    }
     @Override
     protected void onActivityResult(int requestCode,
                                     int resultCode,
