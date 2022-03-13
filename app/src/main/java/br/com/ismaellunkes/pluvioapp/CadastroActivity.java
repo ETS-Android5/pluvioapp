@@ -129,7 +129,7 @@ public class CadastroActivity extends AppCompatActivity {
             return false;
         }
 
-        if (registro.getPrecipitacao().isEmpty()) {
+        if (registro.getPrecipitacao() == null) {
             Toast.makeText(this, getString(R.string.validacao_precipitacao), Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -201,7 +201,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         registro = new Registro();
         registro.setDataHoraRegistro(edtTxtDataHoraReg.getText().toString());
-        registro.setPrecipitacao(edtTxtPrecipitacao.getText().toString());
+        registro.setPrecipitacao(Integer.parseInt(edtTxtPrecipitacao.getText().toString()));
         List<String> locais = new ArrayList<>();
         if (chkPomar01.isChecked()) {
             locais.add(chkPomar01.getText().toString());

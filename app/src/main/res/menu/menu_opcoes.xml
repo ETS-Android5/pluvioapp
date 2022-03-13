@@ -6,6 +6,13 @@
         android:icon="@android:drawable/ic_menu_help"
         android:title="@string/sobre" />
     <item
+        android:id="@+id/ordenar_reponsavel"
+        android:title="@string/ordenar_por_Responsavel" />
+    <item
+        android:id="@+id/ordenar_precipitacao"
+        android:checkable="false"
+        android:title="@string/ordenar_por_precipitacao" />
+    <item
         android:id="@+id/novo"
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/adicionar"

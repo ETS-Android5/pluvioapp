@@ -2,6 +2,7 @@ package br.com.ismaellunkes.pluvioapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,27 +10,30 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ListViewActivity extends AppCompatActivity {
 
     public static final String REGISTRO = "REGISTRO";
+    private static final String ARQUIVO =
+            "br.com.ismaellunkes.pluvioapp.PREFERENCIA_ORDENACAO_LISTA1";
     List<Registro> registros = new ArrayList<>();
-    private int  posicaoSelecionada = -1;
+    private int posicaoSelecionada = -1;
     RegistroAdapterPersonalizado adapter;
     ListView listViewEntities;
     private ActionMode actionMode;
-    private View       viewSelecionada;
+    private View viewSelecionada;
+    private String preferenciaOrdenacao;
 
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
@@ -48,7 +52,7 @@ public class ListViewActivity extends AppCompatActivity {
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 
-            switch(item.getItemId()){
+            switch (item.getItemId()) {
                 case R.id.alterar:
                     alterarRegistro(posicaoSelecionada);
                     mode.finish();
@@ -67,12 +71,12 @@ public class ListViewActivity extends AppCompatActivity {
         @Override
         public void onDestroyActionMode(ActionMode mode) {
 
-            if (viewSelecionada != null){
+            if (viewSelecionada != null) {
                 viewSelecionada.setBackgroundColor(Color.TRANSPARENT);
             }
 
-            actionMode         = null;
-            viewSelecionada    = null;
+            actionMode = null;
+            viewSelecionada = null;
 
             listViewEntities.setEnabled(true);
         }
@@ -122,9 +126,8 @@ public class ListViewActivity extends AppCompatActivity {
                 });
         listViewEntities.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         popularLista();
-        registerForContextMenu(listViewEntities);
-
-}
+        lerPreferenciaOrdenacaoLista();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -134,28 +137,27 @@ public class ListViewActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.novo:
                 adicionarRegistro();
                 return true;
             case R.id.sobre:
                 abrirSobre();
                 return true;
+            case R.id.ordenar_reponsavel:
+                salvarPrefereenciasOrdenacaoLista(getString(R.string.sp_ordenar_por_responsavel));
+                return true;
+            case R.id.ordenar_precipitacao:
+                salvarPrefereenciasOrdenacaoLista(getString(R.string.sp_ordenar_por_precipitacao));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void popularLista(){
+    private void popularLista() {
 
         registros = new ArrayList<>();
-
-        /*adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
-                registros);*/
-
-        //adapter = new ArrayAdapter<Registro>(this,
-        //        android.R.layout.activity_list_item, R.id.listViewRegistros, registros);
 
         if (listViewEntities != null) {
             adapter = new RegistroAdapterPersonalizado(registros, this);
@@ -172,33 +174,26 @@ public class ListViewActivity extends AppCompatActivity {
         cancelar();
     }
 
-    private void alterarRegistro(Integer posicaoSelecionada){
+    private void alterarRegistro(Integer posicaoSelecionada) {
 
         Registro registro = registros.get(posicaoSelecionada);
 
         CadastroActivity.alterarRegistro(this, registro);
     }
 
-    private void excluirRegistro(Integer posicao){
+    private void excluirRegistro(Integer posicao) {
         registros.remove(registros.get(posicao));
         adapter.notifyDataSetChanged();
     }
 
-    public void adicionarRegistro(){
+    public void adicionarRegistro() {
         CadastroActivity.novoRegistro(this);
     }
 
-    public void abrirSobre(){
+    public void abrirSobre() {
         SobreActivity.sobre(this);
     }
 
-    private String getRegistroEmString(Registro registro){
-        return  getString(R.string.datahora_mensagem)+" "+ registro.getDataHoraRegistro() +
-                " | "+getString(R.string.precip_mensagem)+" "+ registro.getPrecipitacao() +
-                "\n"+getString(R.string.locais_mensagem)+" "+ registro.getLocais() +
-                "\n"+getString(R.string.ligou_irrig_mensagem)+" "+ (registro.isLigouIrrigacao() ? R.string.sim : R.string.nao) +
-                " | "+getString(R.string.responsavel_mensagem)+" "+ registro.getResponsavel();
-    }
     @Override
     protected void onActivityResult(int requestCode,
                                     int resultCode,
@@ -217,8 +212,48 @@ public class ListViewActivity extends AppCompatActivity {
             } else {
                 registros.add(registroNew);
             }
-
-            adapter.notifyDataSetChanged();
+            ordenarRegistros(registros);
         }
+    }
+
+    private void ordenarRegistros(List<Registro> registros){
+        ordenarRegistros(preferenciaOrdenacao, registros);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void ordenarRegistros(String preferencia, List<Registro> registros) {
+        if (preferencia.equalsIgnoreCase(getString(R.string.sp_ordenar_por_responsavel))) {
+            Collections.sort(registros, new Comparator<Registro>() {
+                @Override
+                public int compare(Registro o1, Registro o2) {
+                    return (o1.getResponsavel()).compareTo(o2.getResponsavel());
+                }
+            });
+        }
+
+        if (preferencia.equalsIgnoreCase(getString(R.string.sp_ordenar_por_precipitacao))) {
+            Collections.sort(registros, new Comparator<Registro>() {
+                @Override
+                public int compare(Registro o1, Registro o2) {
+                    return (o1.getPrecipitacao()).compareTo(o2.getPrecipitacao());
+                }
+            });
+        }
+    }
+
+    private void lerPreferenciaOrdenacaoLista() {
+        SharedPreferences shared = getSharedPreferences(ARQUIVO, MODE_PRIVATE);
+        String defaultPreferencesOrdemList = getString(R.string.sp_ordenar_por_precipitacao);
+        preferenciaOrdenacao = shared.getString(getString(R.string.ordem_lista), defaultPreferencesOrdemList);
+        ordenarRegistros(registros);
+    }
+
+    private void salvarPrefereenciasOrdenacaoLista(String spOrdemLista) {
+        SharedPreferences sharedPref = getSharedPreferences(ARQUIVO, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.ordem_lista), spOrdemLista);
+        editor.apply();
+        ordenarRegistros(spOrdemLista, registros);
+        adapter.notifyDataSetChanged();
     }
 }

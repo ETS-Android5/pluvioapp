@@ -9,7 +9,7 @@ import java.util.List;
 public class Registro implements Serializable {
 
     private String dataHoraRegistro;
-    private String precipitacao;
+    private Integer precipitacao;
     private List <String> locais;
     private boolean isLigouIrrigacao;
     private String responsavel;
@@ -22,11 +22,11 @@ public class Registro implements Serializable {
         this.dataHoraRegistro = dataHoraRegistro;
     }
 
-    public String getPrecipitacao() {
+    public Integer getPrecipitacao() {
         return precipitacao;
     }
 
-    public void setPrecipitacao(String precipitacao) {
+    public void setPrecipitacao(Integer precipitacao) {
         this.precipitacao = precipitacao;
     }
 
@@ -67,5 +67,4 @@ public class Registro implements Serializable {
         return  "Hora: " + dataHoraRegistro +
                 "\nPrecip. (MM): " + precipitacao;
     }
-
 }

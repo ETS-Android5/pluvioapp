@@ -39,4 +39,9 @@
     <string name="ligou_irrig_mensagem">Turned Irrig.:</string>
     <string name="responsavel_mensagem">Responsible:</string>
     <string name="registro_detalhes">Date/Time: %1$s   |  Precip. (mm): %2$s \nLocation: %3$s   |  Turned Irrig.: %4$s \nResponsible: %5$s</string>
+    <string name="sp_ordenar_por_responsavel" translatable="false">ORDENAR_POR_RESPONSAVEL</string>
+    <string name="sp_ordenar_por_precipitacao" translatable="false">ORDENAR_POR_PRECIPITACAO</string>
+    <string name="ordem_lista" translatable="false">ORDEM_LISTA</string>
+    <string name="ordenar_por_precipitacao">" Sort by precipitation"</string>
+    <string name="ordenar_por_Responsavel">" Sort by responsible"</string>
 </resources>
