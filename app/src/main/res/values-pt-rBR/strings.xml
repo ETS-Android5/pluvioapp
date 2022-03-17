@@ -36,4 +36,6 @@
     <string name="registro_detalhes">Data/Hora: %1$s   |  Precip. (mm): %2$s \nLocal: %3$s   |  Ligou Irrig.: %4$s \nResponsável: %5$s</string>
     <string name="ordenar_por_Responsavel">Ordenar por responsável</string>
     <string name="ordenar_por_precipitacao">Ordenar por Precipitação</string>
+    <string name="confirmacao_acao">Confirme a ação</string>
+    <string name="mensagem_exlusao">Você realmente deseja excluir o registro?</string>
 </resources>

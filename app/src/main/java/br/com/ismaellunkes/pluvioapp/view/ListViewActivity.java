@@ -1,6 +1,9 @@
-package br.com.ismaellunkes.pluvioapp;
+package br.com.ismaellunkes.pluvioapp.view;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -22,6 +25,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import br.com.ismaellunkes.pluvioapp.R;
+import br.com.ismaellunkes.pluvioapp.model.Registro;
+import br.com.ismaellunkes.pluvioapp.persistencia.PluvioDatabase;
+import br.com.ismaellunkes.pluvioapp.utils.UtilsGUI;
+
 public class ListViewActivity extends AppCompatActivity {
 
     public static final String REGISTRO = "REGISTRO";
@@ -34,6 +42,7 @@ public class ListViewActivity extends AppCompatActivity {
     private ActionMode actionMode;
     private View viewSelecionada;
     private String preferenciaOrdenacao;
+    private PluvioDatabase database;
 
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
@@ -87,6 +96,7 @@ public class ListViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
+        database = PluvioDatabase.getDatabase(this);
         listViewEntities = findViewById(R.id.listViewRegistros);
         listViewEntities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -125,8 +135,8 @@ public class ListViewActivity extends AppCompatActivity {
                     }
                 });
         listViewEntities.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        popularLista();
         lerPreferenciaOrdenacaoLista();
+        popularLista();
     }
 
     @Override
@@ -156,13 +166,8 @@ public class ListViewActivity extends AppCompatActivity {
     }
 
     private void popularLista() {
-
-        registros = new ArrayList<>();
-
-        if (listViewEntities != null) {
-            adapter = new RegistroAdapterPersonalizado(registros, this);
-            listViewEntities.setAdapter(adapter);
-        }
+        carregarRegistros();
+        carregarListView();
     }
 
     private void cancelar() {
@@ -182,8 +187,28 @@ public class ListViewActivity extends AppCompatActivity {
     }
 
     private void excluirRegistro(Integer posicao) {
-        registros.remove(registros.get(posicao));
-        adapter.notifyDataSetChanged();
+
+        DialogInterface.OnClickListener listener =
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        switch(which){
+
+                            case DialogInterface.BUTTON_POSITIVE:
+                                database.registroDao().delete(registros.get(posicao));
+                                popularLista();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+
+                                break;
+                        }
+                    }
+                };
+
+        UtilsGUI.confirmaAcao(this, getString(R.string.mensagem_exlusao), listener);
+
     }
 
     public void adicionarRegistro() {
@@ -201,24 +226,26 @@ public class ListViewActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK) {
+        posicaoSelecionada = -1;
+        popularLista();
+    }
 
-            Registro registroNew = (Registro) data.getSerializableExtra(REGISTRO);
-
-            if (requestCode == CadastroActivity.ALTERAR) {
-                registros.remove(posicaoSelecionada);
-                registros.add(posicaoSelecionada, registroNew);
-                posicaoSelecionada = -1;
-            } else {
-                registros.add(registroNew);
-            }
-            ordenarRegistros(registros);
-        }
+    private void carregarRegistros() {
+        registros = new ArrayList<>();
+        registros = database.registroDao().findAll();
+        ordenarRegistros(registros);
     }
 
     private void ordenarRegistros(List<Registro> registros){
         ordenarRegistros(preferenciaOrdenacao, registros);
-        adapter.notifyDataSetChanged();
+    }
+
+    private void carregarListView() {
+        if (listViewEntities != null) {
+            adapter = new RegistroAdapterPersonalizado(registros, this);
+            adapter.notifyDataSetChanged();
+            listViewEntities.setAdapter(adapter);
+        }
     }
 
     private void ordenarRegistros(String preferencia, List<Registro> registros) {
@@ -226,7 +253,7 @@ public class ListViewActivity extends AppCompatActivity {
             Collections.sort(registros, new Comparator<Registro>() {
                 @Override
                 public int compare(Registro o1, Registro o2) {
-                    return (o1.getResponsavel()).compareTo(o2.getResponsavel());
+                    return (o1.responsavel).compareTo(o2.responsavel);
                 }
             });
         }
@@ -235,7 +262,7 @@ public class ListViewActivity extends AppCompatActivity {
             Collections.sort(registros, new Comparator<Registro>() {
                 @Override
                 public int compare(Registro o1, Registro o2) {
-                    return (o1.getPrecipitacao()).compareTo(o2.getPrecipitacao());
+                    return (o1.precipitacao).compareTo(o2.precipitacao);
                 }
             });
         }

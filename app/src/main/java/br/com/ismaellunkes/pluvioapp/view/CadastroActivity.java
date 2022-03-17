@@ -1,6 +1,5 @@
-package br.com.ismaellunkes.pluvioapp;
+package br.com.ismaellunkes.pluvioapp.view;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -22,6 +19,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.ismaellunkes.pluvioapp.R;
+import br.com.ismaellunkes.pluvioapp.model.Registro;
+import br.com.ismaellunkes.pluvioapp.persistencia.PluvioDatabase;
+
 public class CadastroActivity extends AppCompatActivity {
 
     public static final String MODO = "MODO";
@@ -31,6 +32,7 @@ public class CadastroActivity extends AppCompatActivity {
     private Registro registro;
     private Registro registroOriginal;
     private List<Registro> registros;
+    private PluvioDatabase database;
 
     private int modo;
 
@@ -51,6 +53,7 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+        database = PluvioDatabase.getDatabase(this);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -75,18 +78,26 @@ public class CadastroActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Registro registro = (Registro) intent.getSerializableExtra(REGISTRO);
 
-        if (registro != null){
+        modo = intent.getIntExtra(MODO, NOVO);
 
-            modo = intent.getIntExtra(MODO, NOVO);
+        if (registro != null) {
+
+            modo = intent.getIntExtra(MODO, ALTERAR);
+
+         /*   modo = intent.getIntExtra(MODO, NOVO);
 
             if (modo == NOVO){
                // setTitle(getString(R.string.nova_pessoa));
-            }else{
+            } else {*/
 
-                registroOriginal = (Registro) intent.getSerializableExtra(REGISTRO);
-                edtTxtDataHoraReg.setText(registroOriginal.getDataHoraRegistro());
-                edtTxtPrecipitacao.setText(registroOriginal.getPrecipitacao());
-                for (String local :  registroOriginal.getLocais()) {
+            registroOriginal = (Registro) intent.getSerializableExtra(REGISTRO);
+            edtTxtDataHoraReg.setText(registroOriginal.dataHoraRegistro);
+            edtTxtPrecipitacao.setText(String.valueOf(registroOriginal.precipitacao));
+            chkPomar01.setChecked(registro.locais.contains(chkPomar01.getText().toString()));
+            chkPomar02.setChecked(registro.locais.contains(chkPomar02.getText().toString()));
+            chkPomar03.setChecked(registro.locais.contains(chkPomar03.getText().toString()));
+
+                /*for (String local :  registroOriginal.getLocais()) {
                     if (local.equalsIgnoreCase(chkPomar01.getText().toString())){
                         chkPomar01.setChecked(true);
                     }
@@ -98,24 +109,25 @@ public class CadastroActivity extends AppCompatActivity {
                     if (local.equalsIgnoreCase(chkPomar03.getText().toString())){
                         chkPomar03.setChecked(true);
                     }
-                }
+                }*/
 
-                rdBtnNao.setChecked(true);
-                if (registroOriginal.isLigouIrrigacao()) {
-                    rdBtnSim.setChecked(true);
-                }
+            rdBtnNao.setChecked(true);
+            if (registroOriginal.isLigouIrrigacao) {
+                rdBtnSim.setChecked(true);
+            }
 
-                for (int pos = 0; 0 < spiResponsavel.getAdapter().getCount(); pos++){
+            for (int pos = 0; 0 < spiResponsavel.getAdapter().getCount(); pos++) {
 
-                    String valor = (String) spiResponsavel.getItemAtPosition(pos);
+                String valor = (String) spiResponsavel.getItemAtPosition(pos);
 
-                    if (valor.equals(registroOriginal.getResponsavel())){
-                        spiResponsavel.setSelection(pos);
-                        break;
-                    }
+                if (valor.equals(registroOriginal.responsavel)) {
+                    spiResponsavel.setSelection(pos);
+                    break;
                 }
             }
+        //}
         }
+
     }
 
     public void avisoCamposLimpos() {
@@ -124,22 +136,22 @@ public class CadastroActivity extends AppCompatActivity {
 
     private boolean isDadosValidos(Registro registro) {
 
-        if (registro.getDataHoraRegistro().isEmpty()) {
+        if (registro.dataHoraRegistro.isEmpty()) {
             Toast.makeText(this, getString(R.string.validacao_datahora), Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (registro.getPrecipitacao() == null) {
+        if (registro.precipitacao == null) {
             Toast.makeText(this, getString(R.string.validacao_precipitacao), Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (registro.getLocais().isEmpty()) {
+        if (registro.locais.isEmpty()) {
             Toast.makeText(this, getString(R.string.validacao_locais), Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (registro.getResponsavel().isEmpty()) {
+        if (registro.responsavel.isEmpty()) {
             Toast.makeText(this, getString(R.string.validacao_responsavel), Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -154,14 +166,21 @@ public class CadastroActivity extends AppCompatActivity {
 
         setResult(Activity.RESULT_OK, intent);
 
+        if (modo == NOVO) {
+            database.registroDao().insert(registro);
+        }
+
+        if (modo == ALTERAR) {
+            database.registroDao().update(registro);
+        }
+
         finish();
 
-
-        String registroSalvo = getString(R.string.datahora_mensagem)+" "+ registro.getDataHoraRegistro() +
-                            " | "+getString(R.string.precip_mensagem)+" "+ registro.getPrecipitacao() +
-                            "\n"+getString(R.string.locais_mensagem)+" "+ registro.getLocais() +
-                            " | "+getString(R.string.ligou_irrig_mensagem)+" "+ (registro.isLigouIrrigacao() ? getString(R.string.sim) : getString(R.string.nao)) +
-                            "\n "+getString(R.string.responsavel_mensagem)+" "+ registro.getResponsavel();
+        String registroSalvo = getString(R.string.datahora_mensagem)+" "+ registro.dataHoraRegistro +
+                            " | "+getString(R.string.precip_mensagem)+" "+ registro.precipitacao +
+                            "\n"+getString(R.string.locais_mensagem)+" "+ registro.locais +
+                            " | "+getString(R.string.ligou_irrig_mensagem)+" "+ (registro.isLigouIrrigacao ? getString(R.string.sim) : getString(R.string.nao)) +
+                            "\n "+getString(R.string.responsavel_mensagem)+" "+ registro.responsavel;
 
 
         Toast.makeText(this, getString(R.string.mensagem_sucesso) + "\n"+registroSalvo, Toast.LENGTH_LONG).show();
@@ -199,28 +218,45 @@ public class CadastroActivity extends AppCompatActivity {
 
     private void salvarRegistro() {
 
-        registro = new Registro();
-        registro.setDataHoraRegistro(edtTxtDataHoraReg.getText().toString());
-        registro.setPrecipitacao(Integer.parseInt(edtTxtPrecipitacao.getText().toString()));
-        List<String> locais = new ArrayList<>();
+        if(registroOriginal == null){
+            registroOriginal = new Registro();
+        }
+        registroOriginal.dataHoraRegistro = edtTxtDataHoraReg.getText().toString();
+        registroOriginal.precipitacao = !edtTxtPrecipitacao.getText().toString().isEmpty() ? Integer.parseInt(edtTxtPrecipitacao.getText().toString()) : null;
+        registroOriginal.locais = getLocais();
+        registroOriginal.isLigouIrrigacao = rdBtnSim.isChecked();
+        registroOriginal.responsavel = (String) spiResponsavel.getSelectedItem();
+
+        if (isDadosValidos(registroOriginal)) {
+            salvarDados(registroOriginal);
+        }
+    }
+
+    private String getLocais() {
+        /*List<String> locais = new ArrayList<>();*/
+        StringBuilder locais = new StringBuilder();
+        locais.append("[");
         if (chkPomar01.isChecked()) {
-            locais.add(chkPomar01.getText().toString());
+            //locais.add(chkPomar01.getText().toString());
+            locais.append(chkPomar01.getText().toString().concat(", "));
         }
 
         if (chkPomar02.isChecked()) {
-            locais.add(chkPomar02.getText().toString());
+            //locais.add(chkPomar02.getText().toString());
+            locais.append(chkPomar02.getText().toString().concat(", "));
         }
 
         if (chkPomar03.isChecked()) {
-            locais.add(chkPomar03.getText().toString());
+            ///locais.add(chkPomar03.getText().toString());
+            locais.append(chkPomar03.getText().toString());
         }
-        registro.setLocais(locais);
-        registro.setLigouIrrigacao(rdBtnSim.isChecked());
-        registro.setResponsavel((String) spiResponsavel.getSelectedItem());
+        locais.append("]");
+        String locaisFormatado = locais.toString().replace(", ]", "]");
 
-        if (isDadosValidos(registro)) {
-            salvarDados(registro);
+        if (locaisFormatado.trim().contentEquals("[]")) {
+            return "";
         }
+        return locaisFormatado;
     }
 
     private void limparCampos() {

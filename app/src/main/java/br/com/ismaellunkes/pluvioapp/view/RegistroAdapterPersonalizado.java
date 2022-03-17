@@ -1,4 +1,4 @@
-package br.com.ismaellunkes.pluvioapp;
+package br.com.ismaellunkes.pluvioapp.view;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
+
+import br.com.ismaellunkes.pluvioapp.R;
+import br.com.ismaellunkes.pluvioapp.model.Registro;
 
 public class RegistroAdapterPersonalizado extends BaseAdapter {
 
@@ -45,11 +48,11 @@ public class RegistroAdapterPersonalizado extends BaseAdapter {
         //pegando as referências das Views
         TextView dataRegistro = (TextView) view.findViewById(R.id.txtViewDataReg);
         String detalhesRegistro = activity.getString(R.string.registro_detalhes,
-                                                        registro.getDataHoraRegistro(),
-                                                        registro.getPrecipitacao(),
-                                                        registro.getLocais(),
-                                                        registro.isLigouIrrigacao() ? activity.getString(R.string.sim) : activity.getString(R.string.nao),
-                                                        registro.getResponsavel());
+                                                        registro.dataHoraRegistro,
+                                                        String.valueOf(registro.precipitacao),
+                                                        registro.locais,
+                                                        registro.isLigouIrrigacao ? activity.getString(R.string.sim) : activity.getString(R.string.nao),
+                                                        registro.responsavel);
 
         //populando as Views
         dataRegistro.setText(detalhesRegistro);

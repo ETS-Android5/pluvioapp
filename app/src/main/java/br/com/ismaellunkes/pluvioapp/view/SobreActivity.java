@@ -1,16 +1,15 @@
-package br.com.ismaellunkes.pluvioapp;
+package br.com.ismaellunkes.pluvioapp.view;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import br.com.ismaellunkes.pluvioapp.R;
 
 public class SobreActivity extends AppCompatActivity {
 

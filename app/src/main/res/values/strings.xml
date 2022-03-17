@@ -44,4 +44,6 @@
     <string name="ordem_lista" translatable="false">ORDEM_LISTA</string>
     <string name="ordenar_por_precipitacao">" Sort by precipitation"</string>
     <string name="ordenar_por_Responsavel">" Sort by responsible"</string>
+    <string name="confirmacao_acao">Confirm action</string>
+    <string name="mensagem_exlusao">Do you really want to delete the record?</string>
 </resources>
